@@ -1,0 +1,31 @@
+
+<h2>Add / Edit Bedroom</h2>
+<form (ngSubmit)="onSubmit()">
+  <input type="text" [(ngModel)]="bedroomForm.name" name="name" placeholder="Bedroom name" required />
+  <button type="submit">{{ isEditing ? 'Update' : 'Add' }} Bedroom</button>
+  <button *ngIf="isEditing" type="button" (click)="cancelEdit()">Cancel</button>
+</form>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bedroom of bedrooms">
+        <td>{{ bedroom.id }}</td>
+        <td>{{ bedroom.name }}</td>
+        <td>
+          <button (click)="editBedroom(bedroom)">Edit</button>
+          <button class="delete" (click)="deleteBedroom(bedroom.id)">Delete</button>
+          <button (click)="goToSensors(bedroom.id)">Sensors</button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

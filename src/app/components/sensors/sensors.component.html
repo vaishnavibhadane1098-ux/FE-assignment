@@ -1,0 +1,48 @@
+<h3>Environment Data for Bedroom ID: {{ bedroomId }}</h3>
+
+<div>
+  <label>Temperature: <input type="number" [(ngModel)]="newTemperature" /></label>
+  <label>Humidity: <input type="number" [(ngModel)]="newHumidity" /></label>
+  <button (click)="addEnvironmentData()">Add Data</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <!-- <th>ID</th> -->
+      <th>Timestamp</th>
+      <th>Temperature (°C)</th>
+      <th>Humidity (%)</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of environmentData">
+      <!-- <td>{{ data.id }}</td> -->
+      <td>{{ data.timestamp | date:'short' }}</td>
+      <td *ngIf="editingEnvId === data.id">
+        <input type="number" [(ngModel)]="editedData.temperature" />
+      </td>
+      <td *ngIf="editingEnvId !== data.id">
+        {{ data.temperature }}
+      </td>
+      <td *ngIf="editingEnvId === data.id">
+        <input type="number" [(ngModel)]="editedData.humidity" />
+      </td>
+      <td *ngIf="editingEnvId !== data.id">
+        {{ data.humidity }}
+      </td>
+
+      <td>
+        <ng-container *ngIf="editingEnvId === data.id; else editButtons">
+          <button (click)="saveEdit()">Save</button>
+          <button (click)="cancelEdit()">Cancel</button>
+        </ng-container>
+        <ng-template #editButtons>
+          <button (click)="startEdit(data)">Edit</button>
+          <button (click)="deleteEnvironmentData(data.id)">Delete</button>
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>

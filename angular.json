@@ -66,7 +66,8 @@
               "buildTarget": "smart-apartment:build:production"
             },
             "development": {
-              "buildTarget": "smart-apartment:build:development"
+              "buildTarget": "smart-apartment:build:development",
+               "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -92,5 +93,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "8bb481d9-9a5d-4f50-af1f-fd7ce6ce71df"
   }
 }
